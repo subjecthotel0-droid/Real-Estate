@@ -1,9 +1,31 @@
 import  placeholderPropertyObj from './properties/placeholderPropertyObj.js'
 import propertyForSaleArr from './properties/propertyForSaleArr.js'
 
-function getPropertyHtml(property = placeholderPropertyObj) {
-    const {propertyLocation, priceGBP, roomsM2, comment, image} = property
-    const totalSizeM2 = roomsM2.reduce((total,room)=> total + room,0)
+function getPropertyHtml(property = [placeholderPropertyObj]) {
+    
+    return property.map(({
+        propertyLocation,
+        priceGBP,
+        roomsM2,
+        comment,
+        image
+    })=> {
+        const totalSizeM2 = roomsM2.reduce((total,room)=> total + room,0)
+    // console.log('property arg:', property)
+    // console.log('isArray?', Array.isArray(property))
+    // console.log('first item:', property && property[0])
+    
+    return `
+    <section class="card">
+        <img src="D:/Git hUB BACKUP/Repositories/Real Estate/images/${image}" alt = 'property image' >
+        <div class="card-right">
+            <h2>${propertyLocation}</h2>
+            <h3>${priceGBP}</h3>
+            <p>${comment}</p>
+            <h3>${totalSizeM2} m&sup2;</h3>
+        </div>
+    </section> `}).join('')
+    }
 /*
 SUPER CHALLENGE 💪
 
@@ -22,17 +44,9 @@ This is the JS I want you to use to complete this challenge 👇
 The HTML and CSS have been done for you. 
 This is the HTML template 👇. Replace everything in UPPERCASE with property data.
 
-<section class="card">
-    <img src="/images/IMAGE">
-    <div class="card-right">
-        <h2>PROPERTY LOCATION</h2>
-        <h3>PRICE GBP</h3>
-        <p>COMMENT</p>
-        <h3>TOTAL SIZE IN SQUARE METRES m&sup2;</h3>
-    </div>
-</section> 
+
 */
-}
+
 
 /***** Modify 👇 by adding an argument to the function call ONLY. *****/
-document.getElementById('container').innerHTML = getPropertyHtml()
+document.getElementById('container').innerHTML = getPropertyHtml(propertyForSaleArr)
