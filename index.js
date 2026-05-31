@@ -1,4 +1,9 @@
-function getPropertyHtml() {
+import  placeholderPropertyObj from './properties/placeholderPropertyObj.js'
+import propertyForSaleArr from './properties/propertyForSaleArr.js'
+
+function getPropertyHtml(property = placeholderPropertyObj) {
+    const {propertyLocation, priceGBP, roomsM2, comment, image} = property
+    const totalSizeM2 = roomsM2.reduce((total,room)=> total + room,0)
 /*
 SUPER CHALLENGE 💪
 
