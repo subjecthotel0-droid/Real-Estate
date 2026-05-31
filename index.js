@@ -3,29 +3,21 @@ import propertyForSaleArr from './properties/propertyForSaleArr.js'
 
 function getPropertyHtml(property = [placeholderPropertyObj]) {
     
-    return property.map(({
-        propertyLocation,
-        priceGBP,
-        roomsM2,
-        comment,
-        image
-    })=> {
-        const totalSizeM2 = roomsM2.reduce((total,room)=> total + room,0)
-    // console.log('property arg:', property)
-    // console.log('isArray?', Array.isArray(property))
-    // console.log('first item:', property && property[0])
-    
-    return `
-    <section class="card">
+    return property.map(property => {
+        const {propertyLocation, priceGBP, roomsM2, comment, image} = property
+        const totalSizeM2 = roomsM2.reduce((total, room) => total + room, 0)
+        return `
+        <section class="card">
         <img src="D:/Git hUB BACKUP/Repositories/Real Estate/images/${image}" alt = 'property image' >
-        <div class="card-right">
-            <h2>${propertyLocation}</h2>
-            <h3>${priceGBP}</h3>
-            <p>${comment}</p>
-            <h3>${totalSizeM2} m&sup2;</h3>
-        </div>
-    </section> `}).join('')
-    }
+            <div class="card-right">
+                <h2>${propertyLocation}</h2>
+                <h3>$${priceGBP}</h3>
+                <p>${comment}</p>
+                <h3>${totalSizeM2} m&sup2;</h3>
+            </div>
+        </section> `
+    })
+}
 /*
 SUPER CHALLENGE 💪
 
